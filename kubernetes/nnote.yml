@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nnote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nnote
+  template:
+    metadata:
+      labels:
+        app: nnote
+    spec:
+      containers:
+        - name: app
+          image: namdangquoc/nnote:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_DATABASE_HOST
+              value: "mysql"
+            - name: MYSQL_DATABASE_PORT
+              value: "3306"
+            - name: MYSQL_DATABASE_NAME
+              value: "nnote"
+            - name: MYSQL_DATABASE_USERNAME
+              value: "root"
+            - name: MYSQL_DATABASE_PASSWORD
+              value: "password"
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nnote
+spec:
+  selector:
+    app: nnote
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
