@@ -29,4 +29,22 @@ public class NoteControllerImpl implements NoteController {
 
         return "home";
     }
+
+    @Override
+    public String createNote(Model model) {
+
+        Note note = new Note();
+
+        model.addAttribute("note", note);
+
+        return "note/create";
+    }
+
+    @Override
+    public String createNote(Model model, Note note) {
+
+        noteService.create(note);
+
+        return "redirect:/";
+    }
 }

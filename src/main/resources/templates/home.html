@@ -23,18 +23,11 @@
     </div>
 
 
-    <div class="row no-gutters">
-        <div th:each="note : ${notes}">
-            <div class="row border-bottom pb-3">
-                <div class="col col-12">
-                    <h2 th:text="${note.getTitle()}">...</h2>
-                </div>
-
-                <div class="col col-12">
-                    <p th:text="${note.getDescription()}">...</p>
-                    <img th:src="${note.getImage()}" class="img-thumbnail"/>
-                </div>
-            </div>
+    <div th:each="note : ${notes}" class="row no-gutters border-bottom pt-3 pb-3">
+        <div class="col col-xs-12">
+            <h2 th:text="${note.getTitle()}">...</h2>
+            <p th:text="${note.getDescription()}">...</p>
+            <img th:unless="${note.getImage().empty}" th:src="${note.getImage()}" class="img-thumbnail"/>
         </div>
     </div>
 
