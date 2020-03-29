@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,11 +26,22 @@ public class NoteControllerImpl implements NoteController {
     @Autowired
     private FileService fileService;
 
+    private InetAddress inetAddress;
+
+    public NoteControllerImpl() {
+        try {
+            inetAddress = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            log.error(e.getMessage());
+        }
+    }
+
     @Override
     public String getAllNote(Model model) {
         List<Note> notes = noteService.findAll();
         Collections.reverse(notes);
 
+        model.addAttribute("ip", inetAddress);
         model.addAttribute("notes", notes);
 
         log.info("Model {}", model.asMap());
@@ -41,6 +54,7 @@ public class NoteControllerImpl implements NoteController {
 
         Note note = new Note();
 
+        model.addAttribute("ip", inetAddress);
         model.addAttribute("note", note);
 
         return "note/create";
