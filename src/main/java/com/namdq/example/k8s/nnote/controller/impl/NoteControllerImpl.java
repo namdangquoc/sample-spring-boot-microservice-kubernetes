@@ -41,7 +41,7 @@ public class NoteControllerImpl implements NoteController {
         List<Note> notes = noteService.findAll();
         Collections.reverse(notes);
 
-        model.addAttribute("ip", inetAddress);
+        model.addAttribute("ip", inetAddress.getHostAddress());
         model.addAttribute("notes", notes);
 
         log.info("Model {}", model.asMap());
