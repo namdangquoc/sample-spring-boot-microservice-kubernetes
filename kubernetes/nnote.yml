@@ -12,6 +12,10 @@ spec:
       labels:
         app: nnote
     spec:
+      volumes:
+        - name: uploads-volumn
+          hostPath:
+            path: /data/nnote/uploads
       containers:
         - name: app
           image: namdangquoc/nnote:1.0.0
@@ -29,6 +33,9 @@ spec:
             - name: MYSQL_DATABASE_PASSWORD
               value: "password"
           imagePullPolicy: Always
+          volumeMounts:
+            - name: uploads-volumn
+              mountPath: /tmp/uploads
 ---
 apiVersion: v1
 kind: Service
