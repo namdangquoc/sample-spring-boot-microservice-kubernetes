@@ -6,7 +6,15 @@ version: 2
 jobs:
   build:
     docker:
-      environment:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      - image: mysql
+    working_directory: ~/repo
+    environment:
         # Customize the JVM maximum heap limit
         MAVEN_OPTS: -Xmx3200m
 
@@ -20,14 +28,6 @@ jobs:
         MYSQL_DATABASE: nnote
         MYSQL_USER: user
         MYSQL_PASSWORD: passw0rd  
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: mysql
-    working_directory: ~/repo
     steps:
       - checkout
       # Download and cache dependencies
