@@ -2,17 +2,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/mysql:8.0.4
+      - image: mysql
         environment:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: nnote
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
-
     steps:
       - checkout
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready
           command: |
             for i in `seq 1 10`;
@@ -25,9 +21,7 @@ jobs:
 orbs:
   maven: circleci/maven@0.0.12
 workflows:
-  version: 2.1
-  workflow:
-    jobs:
+  jobs:
     - build
   maven_test:
     jobs:
