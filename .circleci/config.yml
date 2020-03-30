@@ -6,20 +6,20 @@ version: 2
 jobs:
   build:
     docker:
-    environment:
-      # Customize the JVM maximum heap limit
-      MAVEN_OPTS: -Xmx3200m
-      
-      MYSQL_DATABASE_HOST: localhost
-      MYSQL_DATABASE_PORT: 3306
-      MYSQL_DATABASE_NAME: nnote
-      MYSQL_DATABASE_USERNAME: user
-      MYSQL_DATABASE_PASSWORD: passw0rd
-      
-      MYSQL_ROOT_PASSWORD: rootpw
-      MYSQL_DATABASE: nnote
-      MYSQL_USER: user
-      MYSQL_PASSWORD: passw0rd  
+      environment:
+        # Customize the JVM maximum heap limit
+        MAVEN_OPTS: -Xmx3200m
+
+        MYSQL_DATABASE_HOST: localhost
+        MYSQL_DATABASE_PORT: 3306
+        MYSQL_DATABASE_NAME: nnote
+        MYSQL_DATABASE_USERNAME: user
+        MYSQL_DATABASE_PASSWORD: passw0rd
+
+        MYSQL_ROOT_PASSWORD: rootpw
+        MYSQL_DATABASE: nnote
+        MYSQL_USER: user
+        MYSQL_PASSWORD: passw0rd  
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
       
