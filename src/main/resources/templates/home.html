@@ -30,7 +30,7 @@
         <div class="col col-xs-12">
             <h2 th:text="${note.getTitle()}">...</h2>
             <p th:text="${note.getDescription()}">...</p>
-            <img th:unless="${note.getImage().empty}" th:src="${note.getImage()}" class="img-thumbnail"/>
+            <img th:unless="${note.getImage() == null}" th:src="${note.getImage()}" class="img-thumbnail"/>
         </div>
     </div>
 

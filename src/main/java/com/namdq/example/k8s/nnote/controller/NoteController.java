@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Controller
 public interface NoteController {
 
@@ -17,5 +19,5 @@ public interface NoteController {
     String createNote(Model model);
 
     @PostMapping("/notes/create")
-    String createNote(Model model, @RequestParam("title") String title, @RequestParam("image") MultipartFile image, @RequestParam("description") String description);
+    String createNote(Model model, @RequestParam("title") String title, @RequestParam("image") MultipartFile image, @RequestParam("description") String description) throws Exception;
 }

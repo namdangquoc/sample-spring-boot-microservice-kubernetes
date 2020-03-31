@@ -61,18 +61,20 @@ public class NoteControllerImpl implements NoteController {
     }
 
     @Override
-    public String createNote(Model model, String title, MultipartFile image, String description) {
-        String imagePath = "/uploads/";
-        try {
-            imagePath += fileService.uploadFile(image);
-        } catch (IOException e) {
-            log.error("Upload image failed: {}, {}, {}", title, image.getOriginalFilename(), description);
+    public String createNote(Model model, String title, MultipartFile image, String description) throws Exception {
+        if (title == null || title.trim().isEmpty()) {
+            return "redirect:/";
         }
 
         Note note = new Note();
         note.setTitle(title);
         note.setDescription(description);
-        note.setImage(imagePath);
+
+        if (image != null && image.getOriginalFilename() != null && !image.getOriginalFilename().isEmpty()) {
+            String imagePath = "/uploads/";
+            imagePath += fileService.uploadFile(image);
+            note.setImage(imagePath);
+        }
 
         noteService.create(note);
 
